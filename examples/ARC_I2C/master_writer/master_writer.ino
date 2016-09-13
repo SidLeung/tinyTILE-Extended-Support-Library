@@ -9,11 +9,10 @@
  *  common ground connection.
  *
  *  Please note:
- *    1. This sketch makes use of ARC_I2C0.  One of the two I2C connections from the ARC core.  For the QUARK core I2C
+ *    1. This sketch makes use of ARC_I2C1.  One of the two I2C connections from the ARC core.  For the QUARK core I2C
  *       connection, please refer to the quarkI2C library.
- *    2. This sketch can easily be changed to make use of ARC_I2C1 - just change to the ARC_I2C1 object instead of ARC_I2C0.
- *    3. The ARC_I2C1 connections are not available in the Arduino 101 hardware platform.
- *    4. The sketch is accessing an external I2C device with an device number (address) of 8.  This address can be
+ *    2. The ARC_I2C1 connections are not available in the Arduino 101 hardware platform.
+ *    3. The sketch is accessing an external I2C device with an device number (address) of 8.  This address can be
  *       changed to fit your setup.
  */
 
@@ -25,16 +24,16 @@ void setup()
   Serial.begin(9600);   // start serial for output
   while(!Serial);       // Wait here till serial terminal is ready/opened
 
-  ARC_I2C0.begin(); // join i2c bus
+  ARC_I2C1.begin(); // join i2c bus
 }
 
 byte x = 1;
 byte rdata;
 void loop()
 {
-  ARC_I2C0.beginTransmission(8);  // transmit to device #8
-  ARC_I2C0.write(x);              // sends one byte
-  int result = ARC_I2C0.endTransmission();    // stop transmitting
+  ARC_I2C1.beginTransmission(8);  // transmit to device #8
+  ARC_I2C1.write(x);              // sends one byte
+  int result = ARC_I2C1.endTransmission();    // stop transmitting
   if (result == 0)
   {
     Serial.print("x =  ");
